@@ -1,0 +1,38 @@
+---
+---
+
+$site-font: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans",
+            "Helvetica Neue", Arial, sans-serif;
+
+$base-font-family: $site-font;
+$headings-font-family: $site-font;
+
+// Keep code readable
+$code-font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+@import "minima";
+
+/* Optional polish */
+body { line-height: 1.65; }
+.wrapper { max-width: 760px; }          // narrower = more “book-like”
+.post-content { font-size: 1.05rem; }   // slightly nicer reading size
+
+.site-footer { padding: 10px 0; }
+
+.site-footer .footer-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.site-footer .license { margin: 0; }
+.site-footer .kofi img { display: block; }
+
+.post-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+}
