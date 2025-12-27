@@ -1,0 +1,17 @@
+---
+layout: default
+title: Comics Archive
+permalink: /comics/archive/
+---
+
+{%- assign comics_sorted = site.comics | sort: "date" | reverse -%}
+
+<ul>
+  {%- for c in comics_sorted -%}
+    <li>
+      <a href="{{ c.url | relative_url }}">
+        {%- if c.num -%}#{{ c.num }} — {%- endif -%}{{ c.title | escape }}
+      </a>
+    </li>
+  {%- endfor -%}
+</ul>

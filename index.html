@@ -1,0 +1,86 @@
+---
+layout: default
+---
+
+<div class="home">
+  {%- comment -%}
+  Unified feed:
+    - site.posts
+    - site.comics (collection)
+
+  Label:
+    - use `type:` if present (Story/Comic/Essay/...)
+    - else infer from collection
+
+  Inline [read more]:
+    - only when `more: true` in front matter
+    - appears right after excerpt (no line break)
+  {%- endcomment -%}
+
+  {%- assign items = site.posts | concat: site.comics | sort: "date" | reverse -%}
+
+  <ul class="post-list">
+    {%- for item in items -%}
+      {%- assign collection = item.collection | default: 'posts' -%}
+
+      {%- assign label = item.type -%}
+      {%- if label == nil or label == '' -%}
+        {%- if collection == 'comics' -%}
+          {%- assign label = 'Comic' -%}
+        {%- else -%}
+          {%- assign label = 'Story' -%}
+        {%- endif -%}
+      {%- endif -%}
+
+      <li class="feed-item">
+        <span class="post-meta">
+          {{ label }} • {{ item.date | date: "%b %-d, %Y" }}
+        </span>
+
+        <h3 class="feed-title">
+          <a class="post-link" href="{{ item.url | relative_url }}">
+            {%- if collection == 'comics' and item.num -%}
+              #{{ item.num }} — {{ item.title | escape }}
+            {%- else -%}
+              {{ item.title | escape }}
+            {%- endif -%}
+          </a>
+        </h3>
+
+        {%- if collection == 'comics' -%}
+          {%- assign img = item.strip_image | default: item.image -%}
+            {%- if img -%}
+            <a href="{{ item.url | relative_url }}">
+            <img
+            src="{{ img | relative_url }}"
+            alt="{{ item.alt | escape }}"
+            loading="lazy"
+            style="max-width: 100%; height: auto; margin-top: .5rem;"
+            />
+            </a>
+            {%- endif -%}
+
+
+          {%- if item.caption -%}
+            <p style="margin-top:.5rem;">{{ item.caption }}</p>
+          {%- endif -%}
+
+        {%- else -%}
+          {%- if item.excerpt -%}
+            <div class="post-excerpt">
+              {{ item.excerpt | strip }}
+              {%- if item.more == true -%}
+                <a href="{{ item.url | relative_url }}">[read more]</a>
+              {%- endif -%}
+            </div>
+          {%- else -%}
+            {%- if item.more == true -%}
+              <a href="{{ item.url | relative_url }}">[read more]</a>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+</div>
+

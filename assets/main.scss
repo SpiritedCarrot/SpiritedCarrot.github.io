@@ -36,3 +36,26 @@ body { line-height: 1.65; }
   display: block;
   margin: 1rem auto;
 }
+
+.comic-figure { margin: 1.5rem 0; }
+.comic-image  { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+
+.comic-nav {
+  display: flex;
+  gap: .5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.comic-btn {
+  border: 1px solid currentColor;
+  padding: .35rem .6rem;
+  text-decoration: none;
+  border-radius: .5rem;
+}
+
+.comic-btn.is-disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}

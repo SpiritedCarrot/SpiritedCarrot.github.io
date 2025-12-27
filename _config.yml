@@ -34,14 +34,32 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 kofi_url: "https://ko-fi.com/U7U11Q58JF"
 kofi_button_img: "https://ko-fi.com/img/githubbutton_sm.svg"
 author: "SpiritedCarrot"
-license_name: "CC BY 4.0"
-license_url: "https://creativecommons.org/licenses/by/4.0/"
-
+license_name: "CC BY-NC 4.0"
+license_url: "https://creativecommons.org/licenses/by-nc/4.0/"
 
 # Build settings
 theme: minima
 plugins:
   - jekyll-feed
+
+collections:
+  comics:
+    output: true
+    permalink: /comics/:name.html
+ 
+defaults:
+  - scope:
+      path: ""
+      type: comics
+    values:
+      published: false
+
+header_pages:
+  - archive.html
+  - comics/index.html
+  - stuff_i_love.html
+
+excerpt_separator: "<!--more-->"
 
 # Exclude from processing.
 # The following items will not be processed, by default.

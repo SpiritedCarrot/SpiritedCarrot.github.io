@@ -1,14 +1,17 @@
 ---
 layout: post
+type: Story
 title:  "unmoored"
 date:   2025-12-21 
 categories: words
+more: true
+published: true
 ---
 
 I watched you stumble through the dark.
 
-You were not prepared when you crossed the border into my realm. People rarely are. They arrive unexpectedly, and yet the reasons are always clear.
-
+You were not prepared when you crossed the border into my realm. People rarely are. They arrive unexpectedly, and yet the reasons are always clear. 
+<!--more-->
 Usually, those who reach the grove have already begun to change. Their hearts are raw. Their minds have scattered somewhere earlier on the road.
 
 Yesterday you were still among others. You sat close to them. You knew life. It was all you had ever known, and you believed you knew it well. It is an easy mistake to confuse that with safety. You felt at home in your life. Most people do, right until they don’t.

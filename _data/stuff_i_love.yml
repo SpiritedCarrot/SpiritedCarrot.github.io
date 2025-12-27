@@ -1,0 +1,29 @@
+- category: Webcomics
+  items:
+    - name: Calvin and Hobbes
+      url: https://www.gocomics.com/calvinandhobbes
+
+    - name: False Knees
+      url: https://www.falseknees.com/
+
+    - name: xkcd
+      url: https://xkcd.com/
+
+
+- category: Literature & Art
+  items:
+    - name: Google Arts & Culture
+      url: https://artsandculture.google.com/
+
+    - name: blog.patrickrothfuss
+      url: https://blog.patrickrothfuss.com/
+
+    - name: All things Tolkien
+      url: https://www.tolkienestate.com/
+
+    - name: beagleverse
+      url: https://beagleverse.com/
+
+
+
+

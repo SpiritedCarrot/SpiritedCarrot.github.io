@@ -1,0 +1,76 @@
+---
+layout: default
+title: Comics
+permalink: /comics/
+---
+
+{%- assign comics_sorted = site.comics | sort: "date" -%}
+{%- assign first = comics_sorted.first -%}
+{%- assign last  = comics_sorted.last -%}
+{%- assign latest = last -%}
+
+{%- if latest -%}
+  {%- assign img = latest.block_image | default: latest.image -%}
+
+  <article class="comic">
+    <h1 class="comic-title">
+      {%- if latest.num -%}#{{ latest.num }} — {%- endif -%}{{ latest.title | escape }}
+    </h1>
+
+    <figure class="comic-figure">
+      <a href="{{ latest.url | relative_url }}">
+        <img
+          class="comic-image"
+          src="{{ img | relative_url }}"
+          alt="{{ latest.alt | escape }}"
+          loading="lazy"
+        />
+      </a>
+
+      {% if latest.caption %}
+        <figcaption class="comic-caption">{{ latest.caption }}</figcaption>
+      {% endif %}
+    </figure>
+
+    {%- assign prev = nil -%}
+    {%- assign next = nil -%}
+
+    {%- for c in comics_sorted -%}
+      {%- if c.url == latest.url -%}
+        {%- assign prev_index = forloop.index0 | minus: 1 -%}
+        {%- assign next_index = forloop.index0 | plus: 1 -%}
+
+        {%- if prev_index >= 0 -%}
+          {%- assign prev = comics_sorted[prev_index] -%}
+        {%- endif -%}
+
+        {%- if next_index < comics_sorted.size -%}
+          {%- assign next = comics_sorted[next_index] -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    <nav class="comic-nav" aria-label="Comic navigation">
+      <a class="comic-btn" href="{{ first.url | relative_url }}" aria-label="First comic">⟪ First</a>
+
+      {% if prev %}
+        <a class="comic-btn" href="{{ prev.url | relative_url }}" aria-label="Previous comic">‹ Prev</a>
+      {% else %}
+        <span class="comic-btn is-disabled" aria-disabled="true">‹ Prev</span>
+      {% endif %}
+
+      <a class="comic-btn" href="{{ '/comics/archive/' | relative_url }}" aria-label="Comics archive">Archive</a>
+
+      {% if next %}
+        <a class="comic-btn" href="{{ next.url | relative_url }}" aria-label="Next comic">Next ›</a>
+      {% else %}
+        <span class="comic-btn is-disabled" aria-disabled="true">Next ›</span>
+      {% endif %}
+
+      <a class="comic-btn" href="{{ last.url | relative_url }}" aria-label="Last comic">Last ⟫</a>
+    </nav>
+  </article>
+
+{%- else -%}
+  <p>No comics yet.</p>
+{%- endif -%}

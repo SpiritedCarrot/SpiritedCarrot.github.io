@@ -1,0 +1,75 @@
+---
+layout: default
+---
+
+<article class="comic">
+  <h1 class="comic-title">{{ page.title }}</h1>
+
+  {%- assign img = page.block_image | default: page.image -%}
+
+  <figure class="comic-figure">
+    <img
+      class="comic-image"
+      src="{{ img | relative_url }}"
+      alt="{{ page.alt | escape }}"
+      loading="lazy"
+    />
+
+    {% if page.caption %}
+      <figcaption class="comic-caption">{{ page.caption }}</figcaption>
+    {% endif %}
+  </figure>
+
+  {%- assign comics_sorted = site.comics | sort: "num" -%}
+  {%- assign first = comics_sorted.first -%}
+  {%- assign last  = comics_sorted.last -%}
+
+  {%- assign prev = nil -%}
+  {%- assign next = nil -%}
+
+  {%- for c in comics_sorted -%}
+    {%- if c.url == page.url -%}
+      {%- assign prev_index = forloop.index0 | minus: 1 -%}
+      {%- assign next_index = forloop.index0 | plus: 1 -%}
+      {%- if prev_index >= 0 -%}
+        {%- assign prev = comics_sorted[prev_index] -%}
+      {%- endif -%}
+      {%- if next_index < comics_sorted.size -%}
+        {%- assign next = comics_sorted[next_index] -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  <nav class="comic-nav" aria-label="Comic navigation">
+    <a class="comic-btn" href="{{ first.url | relative_url }}" aria-label="First comic">⟪ First</a>
+
+    {% if prev %}
+      <a class="comic-btn" href="{{ prev.url | relative_url }}" aria-label="Previous comic">‹ Prev</a>
+    {% else %}
+      <span class="comic-btn is-disabled" aria-disabled="true">‹ Prev</span>
+    {% endif %}
+
+    <!-- If /comics/ is your "latest comic" page, use /comics/archive/ for a real archive list -->
+    <a class="comic-btn" href="{{ '/comics/archive/' | relative_url }}" aria-label="Comics archive">Archive</a>
+
+    {% if next %}
+      <a class="comic-btn" href="{{ next.url | relative_url }}" aria-label="Next comic">Next ›</a>
+    {% else %}
+      <span class="comic-btn is-disabled" aria-disabled="true">Next ›</span>
+    {% endif %}
+
+    <a class="comic-btn" href="{{ last.url | relative_url }}" aria-label="Last comic">Last ⟫</a>
+  </nav>
+</article>
+
+<script>
+  (function () {
+    const prev = {{ prev.url | jsonify }};
+    const next = {{ next.url | jsonify }};
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft" && prev) window.location.href = prev;
+      if (e.key === "ArrowRight" && next) window.location.href = next;
+    });
+  })();
+</script>
+
