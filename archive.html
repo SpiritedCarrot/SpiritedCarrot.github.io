@@ -1,0 +1,45 @@
+---
+layout: default
+title: Archive
+permalink: /archive/
+---
+
+{%- assign items = site.posts | concat: site.comics | sort: "date" | reverse -%}
+{%- assign current_year = "" -%}
+
+{%- for item in items -%}
+  {%- assign year = item.date | date: "%Y" -%}
+
+  {%- if year != current_year -%}
+    {%- if current_year != "" -%}
+      </ul>
+    {%- endif -%}
+    <h2>{{ year }}</h2>
+    <ul>
+    {%- assign current_year = year -%}
+  {%- endif -%}
+
+  {%- assign label = item.type -%}
+  {%- if label == nil or label == "" -%}
+    {%- if item.collection == "comics" -%}
+      {%- assign label = "Comic" -%}
+    {%- else -%}
+      {%- assign label = "Post" -%}
+    {%- endif -%}
+  {%- endif -%}
+
+  <li>
+    <span>{{ label }}: </span>
+    <a href="{{ item.url | relative_url }}">
+      {%- if item.collection == "comics" and item.num -%}
+        #{{ item.num }} — {{ item.title | escape }}
+      {%- else -%}
+        {{ item.title | escape }}
+      {%- endif -%}
+    </a>
+  </li>
+{%- endfor -%}
+
+{%- if items.size > 0 -%}
+  </ul>
+{%- endif -%}

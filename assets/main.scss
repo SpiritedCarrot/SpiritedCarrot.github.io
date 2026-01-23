@@ -1,0 +1,59 @@
+---
+---
+
+$site-font: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans",
+            "Helvetica Neue", Arial, sans-serif;
+
+$base-font-family: $site-font;
+$headings-font-family: $site-font;
+
+// Keep code readable
+$code-font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+@import "minima";
+
+/* Optional polish */
+body { line-height: 1.65; }
+.wrapper { max-width: 760px; }          // narrower = more “book-like”
+.post-content { font-size: 1.05rem; }   // slightly nicer reading size
+
+.site-footer { padding: 10px 0; }
+
+.site-footer .footer-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.site-footer .license { margin: 0; }
+.site-footer .kofi img { display: block; }
+
+.post-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+}
+
+.comic-figure { margin: 1.5rem 0; }
+.comic-image  { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+
+
+.comic-nav{
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.comic-prev{ justify-self: start; }
+.comic-index{ justify-self: center; }
+.comic-next{ justify-self: end; }
+
+.comic-nav .is-disabled{
+  visibility: hidden; /* keeps the slot but hides the text */
+}
+

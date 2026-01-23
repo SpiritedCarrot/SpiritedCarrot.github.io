@@ -1,0 +1,67 @@
+<footer class="site-footer h-card">
+  <data class="u-url" href="{{ "/" | relative_url }}"></data>
+
+  <div class="wrapper">
+    <!--<h2 class="footer-heading">{{ site.title | escape }}</h2>-->
+
+    {% comment %}
+    div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">
+            
+            {%- if site.author -%}
+              {{ site.author | escape }}
+            {%- else -%}
+              {{ site.title | escape }}
+            {%- endif -%}
+            </li>
+            
+            {%- if site.email -%}
+            <li><a class="u-email" href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+            {%- endif -%}
+        </ul>
+      
+        <p class="license">
+           © {{ "now" | date: "%Y" }} {{ site.author }} ·
+          <a href="{{ site.license_url }}" target="_blank" rel="noopener">
+          {{ site.license_name }}
+          </a><!--(attribution required)-->
+        </p>
+      </div>
+
+      
+      <div class="footer-col footer-col-2">
+        <!--{%- include social.html -%}-->
+        <p class="kofi">
+          <a href="https://ko-fi.com/U7U11Q58JF" target="_blank" rel="noopener">
+            <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Support me on Ko-fi">
+          </a>
+        </p>
+      </div>
+
+      
+      <div class="footer-col footer-col-3">
+        <p>{{- site.description | escape -}}</p>
+      </div>
+      {% endcomment %}
+
+      <div class="footer-row">
+        <p class="license">
+          © {{ "now" | date: "%Y" }} {{ site.author }} ·
+          <a href="{{ site.license_url }}" target="_blank" rel="noopener">
+            {{ site.license_name }}
+          </a>
+        </p>
+
+          <a class="kofi" href="https://ko-fi.com/U7U11Q58JF" target="_blank" rel="noopener">
+          <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="Support me on Ko-fi">
+          </a>
+      </div>
+
+
+    </div>
+
+  </div>
+
+</footer>

@@ -1,0 +1,90 @@
+---
+layout: default
+---
+
+<article class="comic">
+  <header class="comic-header">
+    <h1 class="comic-title">{{ page.title }}</h1>
+
+    {% if page.date %}
+      <p class="comic-date">{{ page.date | date: "%Y-%m-%d" }}</p>
+    {% endif %}
+  </header>
+
+  {% assign img = page.block_image | default: page.image %}
+  {% assign alt = page.alt | default: page.title %}
+
+  {% if img %}
+    <figure class="comic-figure">
+      <img
+        class="comic-image"
+        src="{{ img | relative_url }}"
+        alt="{{ alt | escape }}"
+        loading="lazy"
+      />
+
+      {% if page.caption %}
+        <figcaption class="comic-caption">{{ page.caption }}</figcaption>
+      {% endif %}
+    </figure>
+  {% else %}
+    <p><em>No comic image set. Add <code>image:</code> (or <code>block_image:</code>) in the front matter.</em></p>
+  {% endif %}
+
+  {% if content and content != "" %}
+    <div class="comic-body">
+      {{ content }}
+    </div>
+  {% endif %}
+
+  {% comment %}
+    Prev/Next navigation ONLY inside posts whose categories include "comic".
+
+    Note: site.posts is newest-first by default.
+    - "Next →" will go to a NEWER comic
+    - "← Previous" will go to an OLDER comic
+  {% endcomment %}
+
+  {% assign comic_posts = site.posts | where_exp:"p","p.categories contains 'comic'" %}
+
+  {% assign idx = nil %}
+  {% for p in comic_posts %}
+    {% if p.url == page.url %}
+      {% assign idx = forloop.index0 %}
+    {% endif %}
+  {% endfor %}
+
+  {% if idx != nil %}
+    {% assign last_index = comic_posts.size | minus: 1 %}
+
+    {% assign older = nil %}
+    {% assign newer = nil %}
+
+    {% if idx < last_index %}
+      {% assign older_index = idx | plus: 1 %}
+      {% assign older = comic_posts[older_index] %}
+    {% endif %}
+
+    {% if idx > 0 %}
+      {% assign newer_index = idx | minus: 1 %}
+      {% assign newer = comic_posts[newer_index] %}
+    {% endif %}
+
+    <nav class="comic-nav">
+      {% if older %}
+        <a class="comic-prev" href="{{ older.url | relative_url }}">← Previous</a>
+      {% else %}
+        <span class="comic-prev is-disabled" aria-hidden="true">← Previous</span>
+      {% endif %}
+
+      <a class="comic-index" href="{{ '/comics/' | relative_url }}">All comics</a>
+
+      {% if newer %}
+        <a class="comic-next" href="{{ newer.url | relative_url }}">Next →</a>
+      {% else %}
+        <span class="comic-next is-disabled" aria-hidden="true">Next →</span>
+      {% endif %}
+    </nav>
+
+  {% endif %}
+</article>

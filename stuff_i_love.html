@@ -1,0 +1,16 @@
+---
+layout: default
+title: Stuff I love
+permalink: /stuff-i-love/
+---
+
+<p>A collection of links I draw inspiration from.</p>
+
+{% for group in site.data.stuff_i_love %}
+  <h2>{{ group.category }}</h2>
+  <ul>
+    {% for item in group.items %}
+      <li><a href="{{ item.url }}">{{ item.name }}</a></li>
+    {% endfor %}
+  </ul>
+{% endfor %}
