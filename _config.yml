@@ -18,67 +18,76 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: b|ognik
-#email: spirited.carrot@proton.me
-# Write an awesome description for your new site here. You can edit this
-# line in _config.yml. It will appear in your document head meta (for
-# Google search results) and in your feed.xml site description.
-description: >- # this means to ignore newlines until "baseurl:"
-  A place for fragments: notes, images, and half-formed thoughts. 
-  Picked up, kept, and arranged into something new. 
+title: "b|ognik"
+description: >-
+  A place for fragments: notes, images, and half-formed thoughts.
+  Picked up, kept, and arranged into something new.
   Broken and unfinished welcome.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-#twitter_username: jekyllrb
-#github_username:  jekyll
-kofi_url: "https://ko-fi.com/U7U11Q58JF"
-kofi_button_img: "https://ko-fi.com/img/githubbutton_sm.svg"
-author: "SpiritedCarrot"
+
+url: "https://spiritedcarrot.github.io"
+baseurl: ""
+
+remote_theme: "jekyll/minima"
+
+plugins:
+  - jekyll-remote-theme
+  - jekyll-feed
+  - jekyll-seo-tag
+
+header_pages:
+  - archive.md
+  - comics.md
+  - stuff-i-love.md
+
+minima:
+  skin: solarized-dark
+  nav_pages:
+    - archive.md
+    - comics.md
+    - stuff-i-love.md
+  social_links:
+    - title: GitHub
+      icon: github
+      url: "https://github.com/SpiritedCarrot"
+  hide_site_feed_link: true
+
+author: 
+  name: "SpiritedCarrot"
+
 license_name: "CC BY-NC 4.0"
 license_url: "https://creativecommons.org/licenses/by-nc/4.0/"
 
-# Build settings
-theme: minima
-plugins:
-  - jekyll-feed
+kofi_url: "https://ko-fi.com/U7U11Q58JF"
+
+markdown: kramdown
+permalink: pretty
 
 collections:
   comics:
     output: true
-    permalink: /comics/:name.html
- 
+    permalink: /comics/:name/
+
 defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
   - scope:
       path: ""
       type: comics
     values:
-      published: false
+      layout: comic
 
-permalink: /:year/:month/:day/:title/
+sass:
+  style: compressed
 
-header_pages:
-  - archive.html
-  - comics/index.html
-  - stuff_i_love.html
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - .bundle
 
 excerpt_separator: "<!--more-->"
-
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/

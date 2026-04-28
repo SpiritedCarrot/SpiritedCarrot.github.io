@@ -1,11 +1,7 @@
 ---
 layout: post
-type: Story
 title:  "bathroom"
 date:   2025-12-27
-categories: words
-more: true
-published: true
 ---
 
 I ended up in the other bathroom again. I opened the door, and the first thing I noticed was the cold light and the threatening walls closing in on me.
